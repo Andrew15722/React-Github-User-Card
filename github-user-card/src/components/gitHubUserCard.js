@@ -4,6 +4,7 @@ import axios from 'axios';
 class GithubUserCard extends React.Component {
 	constructor(props) {
 		super(props);
+		// * setting initial value of state to an empty string
 		this.state = { imgUrl: '', name: '' };
 	}
 
@@ -11,7 +12,13 @@ class GithubUserCard extends React.Component {
 		const url = `https://api.github.com/users/${this.props.userName}`;
 		let response = await axios.get(url);
 		let data = response.data;
-		this.setState({ imgUrl: data.avatar_url, name: data.name });
+		this.setState({
+			imgUrl: data.avatar_url,
+			name: data.name,
+			followers: data.followers,
+			username: data.login,
+			url: data.url
+		});
 		console.log(response.data);
 	}
 
@@ -20,7 +27,10 @@ class GithubUserCard extends React.Component {
 			<div>
 				<h1>GithubUserCard </h1>
 				<img src={this.state.imgUrl} alt="" />
-				<h2>{this.state.name}</h2>
+				<h2>Name: {this.state.name}</h2>
+				<p>Username: {this.state.login}</p>
+				<p>Followers: {this.state.followers}</p>
+				<a href={`https://github.com/${this.state.username}`}>{`https://github.com/${this.state.username}`}</a>
 			</div>
 		);
 	}
