@@ -24,7 +24,7 @@ class GithubUserCard extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="user-card">
 				<h1>GithubUserCard </h1>
 				<img src={this.state.imgUrl} alt="" />
 				<h2>Name: {this.state.name}</h2>
